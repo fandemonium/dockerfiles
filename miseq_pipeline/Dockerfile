@@ -38,7 +38,7 @@ WORKDIR /build
 #########
 WORKDIR /build
 RUN wget http://rdp.cme.msu.edu/download/RDP_Assembler.tgz && \
-    tar -xzvf RDP_Assembler.tgz && cd RDP_Assembler && \
+    tar -xzvf RDP_Assembler.tgz && cd RDP_Assembler/pandaseq && \
     ./configure && make
 
 #########
