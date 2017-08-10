@@ -14,6 +14,7 @@ RUN apt-get install -y build-essential default-jdk ant curl unzip zip apache2 wg
 RUN	mkdir build 
 WORKDIR /build
 
+
 #########
 ### Java tools: Trimmomatic, FastQC
 #########
@@ -29,7 +30,7 @@ RUN \
      && ipython kernel install
 
 ENV PATH="/usr/local/anaconda/bin:$PATH"
-RUN echo "export PATH=$PATH" >> /home/ubuntu/.profile
+RUN echo "export PATH=$PATH" >> /home/.profile
 WORKDIR /build
 
 #########
@@ -54,8 +55,8 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #########
 ### Volumes
 #########
-RUN mkdir /home/ubuntu/share
-VOLUME /home/ubuntu/share
+RUN mkdir /home/share
+VOLUME /home/share
 
 #########
 ### Ports and CMD
