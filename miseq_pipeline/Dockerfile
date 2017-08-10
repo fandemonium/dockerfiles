@@ -29,7 +29,7 @@ RUN \
      && ipython kernel install
 
 ENV PATH="/usr/local/anaconda/bin:$PATH"
-RUN echo "export PATH=$PATH" >> /home/testing/.profile
+RUN echo "export PATH=$PATH" >> /home/ubuntu/.profile
 WORKDIR /build
 
 #########
@@ -54,8 +54,8 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #########
 ### Volumes
 #########
-RUN mkdir /home/testing/share
-VOLUME /home/testing/share
+RUN mkdir /home/ubuntu/share
+VOLUME /home/ubuntu/share
 
 #########
 ### Ports and CMD
