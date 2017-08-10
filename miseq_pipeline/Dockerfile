@@ -20,7 +20,7 @@ WORKDIR /build
 RUN \
      # install anaconda for python 2.7 and R
      wget -q https://repo.continuum.io/archive/Anaconda2-4.4.0-Linux-x86_64.sh -O anaconda.sh \
-     && yes | bash $HOME/anaconda.sh -b -p /usr/local/anaconda \ 
+     && yes | bash anaconda.sh -b -p /usr/local/anaconda \ 
      && export PATH=/usr/local/anaconda/bin:$PATH \
      && conda update -q -y --all \
      && conda install r-essentials \
