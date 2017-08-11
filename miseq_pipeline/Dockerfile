@@ -4,7 +4,7 @@ MAINTAINER Fan Yang (snisiarc@gmail.com)
 #########
 ### gnu parallel
 #########
-RUN apt-get install parallel
+RUN apt-get update && apt-get install -y parallel
 
 #########
 ### Working dir
