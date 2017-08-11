@@ -36,9 +36,10 @@ RUN git clone https://github.com/rdpstaff/RDPTools && \
 WORKDIR /tools
 RUN wget https://github.com/torognes/vsearch/releases/download/v2.4.3/vsearch-2.4.3-linux-x86_64.tar.gz && \
     tar -xzvf vsearch-2.4.3-linux-x86_64.tar.gz && \
-    cd  vsearch-2.4.3-linux-x86_64 && \
-    ./autogen.sh && \
-    ./configure && make && make install
+    cd  vsearch-2.4.3-linux-x86_64/bin
+
+ENV PATH="/tools/vsearch-2.4.3-linux-x86_64/bin:$PATH"
+RUN echo "export PATH=$PATH" >> /home/.profile
 
 #########
 ### Clean up
