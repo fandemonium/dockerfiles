@@ -6,7 +6,7 @@ MAINTAINER Fan Yang (snisiarc@gmail.com)
 #########
 RUN apt-get update
 RUN apt-get install -y build-essential default-jdk ant curl unzip zip apache2 wget git ftp libghc-zlib-dev locales supervisor openssl openssh-server \
-	libcairo2-dev libpango1.0-dev libltdl-dev bzip2
+	libcairo2-dev libpango1.0-dev libltdl-dev libbz2-dev 
 
 #########
 ### Working dir
@@ -39,7 +39,7 @@ WORKDIR /build
 WORKDIR /build
 RUN wget http://rdp.cme.msu.edu/download/RDP_Assembler.tgz && \
     tar -xzvf RDP_Assembler.tgz && cd RDP_Assembler/pandaseq && \
-    ./configure && make
+    ./configure && make && make install
 
 #########
 ### Clean up
