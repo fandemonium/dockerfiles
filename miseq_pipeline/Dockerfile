@@ -1,4 +1,4 @@
-FROM conda_python27_R
+FROM fy/conda_base
 MAINTAINER Fan Yang (snisiarc@gmail.com)
 
 #########
@@ -35,12 +35,6 @@ RUN rm -rf *.tgz
 ### Supervisor
 #########
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-#########
-### Volumes
-#########
-RUN mkdir /home/share
-VOLUME /home/share
 
 #########
 ### Ports and CMD
