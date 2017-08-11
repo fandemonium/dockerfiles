@@ -2,6 +2,11 @@ FROM fy/conda_base
 MAINTAINER Fan Yang (snisiarc@gmail.com)
 
 #########
+### gnu parallel
+#########
+RUN apt-get install parallel
+
+#########
 ### Working dir
 #########
 RUN	mkdir tools 
@@ -26,10 +31,20 @@ RUN git clone https://github.com/rdpstaff/RDPTools && \
     make
 
 #########
+### vsearch
+#########
+WORKDIR /tools
+RUN wget https://github.com/torognes/vsearch/releases/download/v2.4.3/vsearch-2.4.3-linux-x86_64.tar.gz && \
+    tar -xzvf vsearch-2.4.3-linux-x86_64.tar.gz && \
+    cd  vsearch-2.4.3-linux-x86_64 && \
+    ./autogen.sh && \
+    ./configure && make && make install
+
+#########
 ### Clean up
 #########
 WORKDIR /tools
-RUN rm -rf *.tgz
+RUN rm -rf *.tgz *.tar.gz
 
 #########
 ### Supervisor
