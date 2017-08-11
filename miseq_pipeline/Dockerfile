@@ -11,8 +11,8 @@ RUN apt-get install -y build-essential default-jdk ant curl unzip zip apache2 wg
 #########
 ### Working dir
 #########
-RUN	mkdir build 
-WORKDIR /build
+RUN	mkdir tools 
+WORKDIR /tools
 
 
 #########
@@ -31,21 +31,20 @@ RUN \
 
 ENV PATH="/usr/local/anaconda/bin:$PATH"
 RUN echo "export PATH=$PATH" >> /home/.profile
-WORKDIR /build
 
 #########
 ### Pip installs: multiQC
 #########
-WORKDIR /build
+WORKDIR /tools
 RUN wget http://rdp.cme.msu.edu/download/RDP_Assembler.tgz && \
     tar -xzvf RDP_Assembler.tgz && cd RDP_Assembler/pandaseq && \
-    ./configure && make && make install
+    ./configure && make 
 
 #########
 ### Clean up
 #########
-WORKDIR /
-RUN rm -rf /build
+WORKDIR /tools
+RUN rm -rf *.tgz
 
 #########
 ### Supervisor
