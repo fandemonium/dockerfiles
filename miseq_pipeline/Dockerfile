@@ -42,6 +42,15 @@ ENV PATH="/tools/vsearch-2.4.3-linux-x86_64/bin:$PATH"
 RUN echo "export PATH=$PATH" >> /home/.profile
 
 #########
+##3 cdhit 4.6.8
+#########
+WORKDIR /tools
+RUN wget https://github.com/weizhongli/cdhit/releases/download/V4.6.8/cd-hit-v4.6.8-2017-0621-source.tar.gz && \
+    tar -xzvf cd-hit-v4.6.8-2017-0621-source.tar.gz && \
+    cd cd-hit-v4.6.8-2017-0621 && \
+    make
+
+#########
 ### Clean up
 #########
 WORKDIR /tools
