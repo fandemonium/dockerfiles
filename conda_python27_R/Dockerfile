@@ -24,6 +24,7 @@ RUN \
      && yes | bash anaconda.sh -b -p /usr/local/anaconda \ 
      && export PATH=/usr/local/anaconda/bin:$PATH \
      && conda update -q -y --all \
+     && conda install -c anaconda biopython \
      && conda install r-essentials \
      && conda update r-essentials \
      && conda install -c r r-irkernel \
