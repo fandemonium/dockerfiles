@@ -7,6 +7,11 @@ MAINTAINER Fan Yang (snisiarc@gmail.com)
 RUN apt-get update && apt-get install -y parallel
 
 #########
+### aws cli
+#########
+RUN pip install awscli
+
+#########
 ### Working dir
 #########
 RUN	mkdir tools 
