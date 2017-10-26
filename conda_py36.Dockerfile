@@ -28,6 +28,13 @@ RUN \
 
 ENV PATH="/usr/local/anaconda/bin:$PATH"
 RUN echo "export PATH=$PATH" >> /home/.profile
+RUN echo "export LC_ALL=C.UTF-8" >> /home/.profile
+RUN echo "export LANG=C.UTF-8" >> /home/.profile
+
+#########
+### install redbiom to interact with emp
+#########
+RUN pip install redbiom
 
 #########
 ### Clean up
