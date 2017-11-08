@@ -35,6 +35,11 @@ ENV PATH="/usr/local/anaconda/bin:$PATH"
 RUN echo "export PATH=$PATH" >> /home/.profile
 
 #########
+### aws cli
+#########
+RUN pip install awscli
+
+#########
 ### Clean up
 #########
 WORKDIR /
