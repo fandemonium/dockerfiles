@@ -57,10 +57,10 @@ RUN wget https://github.com/weizhongli/cdhit/releases/download/V4.6.8/cd-hit-v4.
 ### edirect
 #########
 WORKDIR /tools
-RUN perl -MNet::FTP -e \
-    '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1);
-     $ftp->login; $ftp->binary;
-     $ftp->get("/entrez/entrezdirect/edirect.tar.gz");' \
+CMD [perl -MNet::FTP -e \
+    '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1); \
+     $ftp->login; $ftp->binary; \
+     $ftp->get("/entrez/entrezdirect/edirect.tar.gz")'] \
      && gunzip -c edirect.tar.gz | tar xf - \
      && ./edirect/setup.sh
 
@@ -69,7 +69,7 @@ RUN perl -MNet::FTP -e \
 #########
 WORKDIR /tools
 RUN wget http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz && \
-    tar -xzvf hmmer-3.1b2-linux-intel-x86_64.tar.gz && \
+    tar -xzvf hmmer-3.1b2-linux-intel-x86_64.tar.gz 
 
 #########
 ### bowtie2-2.3.3.2
@@ -99,7 +99,6 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #########
 ### Volumes
 #########
-RUN mkdir /home/share
 VOLUME /home/share
 
 #########
