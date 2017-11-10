@@ -5,7 +5,7 @@ MAINTAINER Fan Yang (snisiarc@gmail.com)
 #########
 ### gnu parallel
 #########
-RUN apt-get update && apt-get install -y parallel
+RUN apt-get update && apt-get install -y parallel liblzma
 
 ##########
 #### aws cli
@@ -78,17 +78,34 @@ WORKDIR /tools
 RUN curl -L https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.3.3.1/bowtie2-2.3.3.1-linux-x86_64.zip > bowtie2.zip && \
     unzip bowtie2.zip
 
+#########
+### samtools and related
+#########
+WORKDIR /tools
+RUN wget https://github.com/samtools/samtools/releases/download/1.6/samtools-1.6.tar.bz2 && \
+    tar -xjf samtools-1.6.tar.bz2 && \
+    cd samtools-1.6 && \
+    ./configure --prefix=/tools/samtools-1.6 && \
+    make && make install
+
+RUN wget https://github.com/samtools/bcftools/releases/download/1.6/bcftools-1.6.tar.bz2
+    tar -xjf bcftools-1.6.tar.bz2 && \
+    cd bcftools-1.6 && \
+    ./configure --prefix=/tools/bcftools-1.6 && \
+    make && make install
+
 ### clean up and set env
 #########
 WORKDIR /tools
-RUN rm -rf *.tgz *.tar.gz
+RUN rm -rf *.tgz *.tar.gz *.zip *.bz2
 
 ENV PATH="/tools/vsearch-2.4.3-linux-x86_64/bin:$PATH"
 ENV PATH="/tools/cd-hit-v4.6.8-2017-0621:$PATH"
 ENV export PATH=$PATH:$HOME/edirect >& /dev/null || setenv PATH "${PATH}:$HOME/edirect"
 ENV PATH="/tools/hmmer-3.1b2-linux-intel-x86_64/binaries:$PATH"
 ENV PATH="/tools/bowtie2-2.3.3.1-linux-x86_64:$PATH"
-#ENV PATH="/usr/local/anaconda/bin:$PATH"
+ENV PATH="/tools/samtools-1.6/bin:$PATH"
+ENV PATH="/tools/bcftools-1.6/bin:$PATH"
 RUN echo "export PATH=$PATH" >> /home/.profile
 
 #########
