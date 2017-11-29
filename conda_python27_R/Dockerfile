@@ -25,7 +25,6 @@ RUN \
      wget -q https://repo.continuum.io/archive/Anaconda2-4.4.0-Linux-x86_64.sh -O anaconda.sh \
      && yes | bash anaconda.sh -b -p /usr/local/anaconda \ 
      && export PATH=/usr/local/anaconda/bin:$PATH \
-##     && conda update -q -y --all \
      && conda install -c anaconda gcc_linux-64 conda=4.3.21 \
      && conda install -c anaconda biopython conda=4.3.21 \
      && conda install r-essentials conda=4.3.21 \
