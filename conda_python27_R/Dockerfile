@@ -6,7 +6,8 @@ MAINTAINER Fan Yang (snisiarc@gmail.com)
 #########
 RUN apt-get update
 RUN apt-get install -y build-essential default-jdk ant curl unzip zip apache2 wget git ftp libghc-zlib-dev locales supervisor openssl openssh-server \
-	libcairo2-dev libpango1.0-dev libltdl-dev libbz2-dev vim libpq-dev libgeos-dev
+	libcairo2-dev libpango1.0-dev libltdl-dev libbz2-dev vim libpq-dev libgeos-dev \
+	gfortran
 
 #########
 ### Working dir
@@ -20,15 +21,16 @@ WORKDIR /build
 #########
 RUN \
      # install anaconda for python 2.7 and R
+	 # conda gnu gcc is broken. do not update until fixed
      wget -q https://repo.continuum.io/archive/Anaconda2-4.4.0-Linux-x86_64.sh -O anaconda.sh \
      && yes | bash anaconda.sh -b -p /usr/local/anaconda \ 
      && export PATH=/usr/local/anaconda/bin:$PATH \
-     && conda update -q -y --all \
-     && conda install gcc_linux-64 \
-     && conda install -c anaconda biopython \
-     && conda install r-essentials \
-     && conda update r-essentials \
-     && conda install -c r r-irkernel \
+##     && conda update -q -y --all \
+     && conda install -c anaconda gcc_linux-64 conda=4.3.21 \
+     && conda install -c anaconda biopython conda=4.3.21 \
+     && conda install r-essentials conda=4.3.21 \
+     && conda update r-essentials conda=4.3.21 \
+     && conda install -c r r-irkernel conda=4.3.21 \
      && ipython kernel install
 
 ENV PATH="/usr/local/anaconda/bin:$PATH"
