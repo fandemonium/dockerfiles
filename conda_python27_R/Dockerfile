@@ -27,9 +27,7 @@ RUN \
      && export PATH=/usr/local/anaconda/bin:$PATH \
      && conda install -c anaconda gcc_linux-64 conda=4.3.21 \
      && conda install -c anaconda biopython conda=4.3.21 \
-     && conda install r-essentials conda=4.3.21 \
-     && conda install -c r r-irkernel conda=4.3.21 \
-     && ipython kernel install
+     && conda install r-essentials conda=4.3.21
 
 ENV PATH="/usr/local/anaconda/bin:$PATH"
 RUN echo "export PATH=$PATH" >> /home/.profile
