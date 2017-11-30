@@ -28,7 +28,6 @@ RUN \
      && conda install -c anaconda gcc_linux-64 conda=4.3.21 \
      && conda install -c anaconda biopython conda=4.3.21 \
      && conda install r-essentials conda=4.3.21 \
-     && conda update r-essentials conda=4.3.21 \
      && conda install -c r r-irkernel conda=4.3.21 \
      && ipython kernel install
 
