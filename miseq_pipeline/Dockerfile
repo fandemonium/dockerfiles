@@ -92,7 +92,7 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.6/samtools-1.6
     ./configure --prefix=/tools/samtools-1.6 && \
     make && make install
 
-RUN wget https://github.com/samtools/bcftools/releases/download/1.6/bcftools-1.6.tar.bz2
+RUN wget https://github.com/samtools/bcftools/releases/download/1.6/bcftools-1.6.tar.bz2 && \
     tar -xjf bcftools-1.6.tar.bz2 && \
     cd bcftools-1.6 && \
     ./configure --prefix=/tools/bcftools-1.6 && \
