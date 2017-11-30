@@ -65,8 +65,8 @@ RUN wget ftp://ftp.ncbi.nlm.nih.gov//entrez/entrezdirect/edirect.tar.gz -O edire
 ### sra toolkit
 #########
 WORKDIR /tools
-RUN wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.8.2-1/sratoolkit.2.8.2-1-ubuntu64.tar.gz \
-	&& tar -zxvf sratoolkit.2.8.2-1-ubuntu64.tar.gz \
+RUN wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.8.2-1/sratoolkit.2.8.2-1-ubuntu64.tar.gz -O sratoolkit.tar.gz \
+	&& tar -zxvf sratoolkit.tar.gz
 
 #########
 ### hmmer3.1b2
