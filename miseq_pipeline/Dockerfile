@@ -5,7 +5,7 @@ MAINTAINER Fan Yang (snisiarc@gmail.com)
 #########
 ### gnu parallel
 #########
-RUN apt-get update && apt-get install -y parallel liblzma
+RUN apt-get update && apt-get install -y parallel liblzma-dev
 
 ##########
 #### aws cli
@@ -57,12 +57,16 @@ RUN wget https://github.com/weizhongli/cdhit/releases/download/V4.6.8/cd-hit-v4.
 ### edirect
 #########
 WORKDIR /tools
-CMD [perl -MNet::FTP -e \
-    '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1); \
-     $ftp->login; $ftp->binary; \
-     $ftp->get("/entrez/entrezdirect/edirect.tar.gz")'] \
-     && gunzip -c edirect.tar.gz | tar xf - \
-     && ./edirect/setup.sh
+RUN wget ftp://ftp.ncbi.nlm.nih.gov//entrez/entrezdirect/edirect.tar.gz -O edirect.tar.gz \     
+  	&& tar -zxvf edirect.tar.gz \
+    && ./edirect/setup.sh
+
+#########
+### sra toolkit
+#########
+WORKDIR /tools
+RUN wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.8.2-1/sratoolkit.2.8.2-1-ubuntu64.tar.gz \
+	&& tar -zxvf sratoolkit.2.8.2-1-ubuntu64.tar.gz \
 
 #########
 ### hmmer3.1b2
@@ -101,7 +105,8 @@ RUN rm -rf *.tgz *.tar.gz *.zip *.bz2
 
 ENV PATH="/tools/vsearch-2.4.3-linux-x86_64/bin:$PATH"
 ENV PATH="/tools/cd-hit-v4.6.8-2017-0621:$PATH"
-ENV export PATH=$PATH:$HOME/edirect >& /dev/null || setenv PATH "${PATH}:$HOME/edirect"
+ENV PATH="/tools/edirect:$PATH"
+ENV PATH="/tools/sratoolkit.2.8.2-1-ubuntu64/bin:$PATH"
 ENV PATH="/tools/hmmer-3.1b2-linux-intel-x86_64/binaries:$PATH"
 ENV PATH="/tools/bowtie2-2.3.3.1-linux-x86_64:$PATH"
 ENV PATH="/tools/samtools-1.6/bin:$PATH"
