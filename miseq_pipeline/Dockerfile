@@ -98,6 +98,14 @@ RUN wget https://github.com/samtools/bcftools/releases/download/1.6/bcftools-1.6
     ./configure --prefix=/tools/bcftools-1.6 && \
     make && make install
 
+#########
+### blast+
+#########
+WORKDIR /tools
+RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.7.1+-x64-linux.tar.gz && \
+	tar -xzvf ncbi-blast-2.7.1+-x64-linux.tar.gz
+
+#########
 ### clean up and set env
 #########
 WORKDIR /tools
@@ -111,6 +119,8 @@ ENV PATH="/tools/hmmer-3.1b2-linux-intel-x86_64/binaries:$PATH"
 ENV PATH="/tools/bowtie2-2.3.3.1-linux-x86_64:$PATH"
 ENV PATH="/tools/samtools-1.6/bin:$PATH"
 ENV PATH="/tools/bcftools-1.6/bin:$PATH"
+ENV PATH="/tools/ncbi-blast-2.7.1+/bin:$PATH"
+
 RUN echo "export PATH=$PATH" >> /home/.profile
 
 #########
