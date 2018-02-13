@@ -5,7 +5,7 @@ MAINTAINER Fan Yang (snisiarc@gmail.com)
 #########
 ### gnu parallel
 #########
-RUN apt-get update && apt-get install -y parallel liblzma-dev libaio1 libaio-dev
+RUN apt-get update && apt-get install -y parallel liblzma-dev
 
 ##########
 #### aws cli
@@ -17,11 +17,6 @@ RUN apt-get update && apt-get install -y parallel liblzma-dev libaio1 libaio-dev
 #########
 RUN	mkdir tools 
 WORKDIR /tools
-
-#########
-### R oracle
-#########
-RUN conda install -c edurand r-roracle conda=4.3.21
 
 #########
 ### RDP pandaseq
