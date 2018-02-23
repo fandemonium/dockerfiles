@@ -2,7 +2,7 @@ FROM ubuntu
 MAINTAINER Fan Yang (snisiarc@gmail.com)
 
 #########
-### Aptitude packages
+### basic linux softwares
 #########
 RUN apt-get update
 RUN apt-get install -y build-essential default-jdk ant curl unzip zip apache2 wget git ftp libghc-zlib-dev locales supervisor openssl openssh-server \
