@@ -17,7 +17,7 @@ WORKDIR /build
 
 
 #########
-### Java tools: Trimmomatic, FastQC
+### annaconda python 2.7 and R
 #########
 RUN \
      # install anaconda for python 2.7 and R
