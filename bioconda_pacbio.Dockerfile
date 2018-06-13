@@ -15,23 +15,21 @@ RUN apt-get install -y build-essential default-jdk ant curl unzip zip apache2 wg
 RUN	mkdir build 
 WORKDIR /build
 
-
 #########
 ### connda py 3.6
 #########
 RUN \
-     # install anaconda for python 3.6
-     wget -q https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh -O anaconda.sh \ 
-     && yes | bash anaconda.sh -b -p /usr/local/anaconda \ 
-     && export PATH=/usr/local/anaconda/bin:$PATH \
-	 && conda config --add channels defaults
-     && conda config --add channels conda-forge
-	 && conda config --add channels bioconda
-     && conda update -q -y --all \
-     && conda install -c anaconda biopython \
-     && conda install -c r r i-essentials \
-	 && conda install lima \
-	 && conda install bam2fastx
+	wget -q https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh -O anaconda.sh \ 
+	&& yes | bash anaconda.sh -b -p /usr/local/anaconda \ 
+	&& export PATH=/usr/local/anaconda/bin:$PATH \
+	&& conda config --add channels defaults \
+	&& conda config --add channels conda-forge \
+	&& conda config --add channels bioconda \
+	&& conda update -q -y --all \
+	&& conda install -c anaconda biopython \
+	&& conda install -c r r i-essentials \
+	&& conda install lima \
+	&& conda install bam2fastx
 	
 ENV PATH="/usr/local/anaconda/bin:$PATH"
 RUN echo "export PATH=$PATH" >> /home/.profile
