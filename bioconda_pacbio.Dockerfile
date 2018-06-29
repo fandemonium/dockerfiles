@@ -27,7 +27,7 @@ RUN \
 	&& conda config --add channels bioconda \
 	&& conda update -q -y --all \
 	&& conda install -c anaconda biopython \
-	&& conda install -c r r i-essentials \
+	&& conda install -c r r r-essentials \
 	&& conda install lima \
 	&& conda install bam2fastx
 	
