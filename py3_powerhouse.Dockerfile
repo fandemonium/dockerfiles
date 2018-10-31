@@ -37,12 +37,12 @@ RUN git clone https://github.com/rdpstaff/RDPTools && \
     make
 
 #########
-### vsearch
+### vsearch 2.9.1
 #########
 WORKDIR /tools
-RUN wget https://github.com/torognes/vsearch/releases/download/v2.4.3/vsearch-2.4.3-linux-x86_64.tar.gz && \
-    tar -xzvf vsearch-2.4.3-linux-x86_64.tar.gz && \
-    cd  vsearch-2.4.3-linux-x86_64/bin
+RUN wget https://github.com/torognes/vsearch/releases/download/v2.9.1/vsearch-2.9.1-linux-x86_64.tar.gz && \
+    tar -xzvf vsearch-2.9.1-linux-x86_64.tar.gz && \
+    cd  vsearch-2.9.1-linux-x86_64/bin
 
 #########
 ##3 cdhit 4.6.8
@@ -62,41 +62,29 @@ RUN wget ftp://ftp.ncbi.nlm.nih.gov//entrez/entrezdirect/edirect.tar.gz -O edire
     && ./edirect/setup.sh
 
 #########
-### sra toolkit
+### sra toolkit 2.9.2
 #########
 WORKDIR /tools
-RUN wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.8.2-1/sratoolkit.2.8.2-1-ubuntu64.tar.gz -O sratoolkit.tar.gz \
+RUN wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.9.2/sratoolkit.2.9.2-ubuntu64.tar.gz -O sratoolkit.tar.gz \
 	&& tar -zxvf sratoolkit.tar.gz
 
 #########
-### hmmer3.1b2
+### hmmer 3.2.1
 #########
 WORKDIR /tools
-RUN wget http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz && \
-    tar -xzvf hmmer-3.1b2-linux-intel-x86_64.tar.gz 
+RUN wget http://eddylab.org/software/hmmer/hmmer-3.2.1.tar.gz -O hmmer.tar.gz && \
+    tar -xzvf hmmer.tar.gz 
 
 #########
 ### bowtie2-2.3.3.2
 #########
-WORKDIR /tools
-RUN curl -L https://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.3.3.1/bowtie2-2.3.3.1-linux-x86_64.zip > bowtie2.zip && \
-    unzip bowtie2.zip
+RUN conda install -c bioconda bowtie2
 
 #########
 ### samtools and related
 #########
-WORKDIR /tools
-RUN wget https://github.com/samtools/samtools/releases/download/1.6/samtools-1.6.tar.bz2 && \
-    tar -xjf samtools-1.6.tar.bz2 && \
-    cd samtools-1.6 && \
-    ./configure --prefix=/tools/samtools-1.6 && \
-    make && make install
-
-RUN wget https://github.com/samtools/bcftools/releases/download/1.6/bcftools-1.6.tar.bz2 && \
-    tar -xjf bcftools-1.6.tar.bz2 && \
-    cd bcftools-1.6 && \
-    ./configure --prefix=/tools/bcftools-1.6 && \
-    make && make install
+RUN conda install -c bioconda samtools
+RUN conda install -c bioconda bcftools
 
 #########
 ### blast+
@@ -116,17 +104,8 @@ ENV PATH="/tools/cd-hit-v4.6.8-2017-0621:$PATH"
 ENV PATH="/tools/edirect:$PATH"
 ENV PATH="/tools/sratoolkit.2.8.2-1-ubuntu64/bin:$PATH"
 ENV PATH="/tools/hmmer-3.1b2-linux-intel-x86_64/binaries:$PATH"
-ENV PATH="/tools/bowtie2-2.3.3.1-linux-x86_64:$PATH"
-ENV PATH="/tools/samtools-1.6/bin:$PATH"
-ENV PATH="/tools/bcftools-1.6/bin:$PATH"
-ENV PATH="/tools/ncbi-blast-2.7.1+/bin:$PATH"
 
 RUN echo "export PATH=$PATH" >> /home/.profile
-
-#########
-### Supervisor
-#########
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 #########
 ### Volumes
@@ -137,4 +116,3 @@ VOLUME /home/share
 ### Ports and CMD
 #########
 EXPOSE 22 80 443
-CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]

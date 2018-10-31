@@ -37,12 +37,14 @@ RUN echo "export LANG=C.UTF-8" >> /home/.profile
 #########
 ### aws cli
 #########
+RUN pip install --upgrade pip
 RUN pip install awscli
 
-#########
-### install redbiom to interact with emp
-#########
-RUN pip install redbiom
+###########
+##### install redbiom to interact with emp
+###########
+##RUN pip install biom-format
+##RUN pip install redbiom
 
 #########
 ### Clean up
