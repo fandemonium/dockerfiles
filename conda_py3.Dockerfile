@@ -7,7 +7,12 @@ MAINTAINER Fan Yang (snisiarc@gmail.com)
 RUN apt-get update
 RUN apt-get install -y build-essential default-jdk ant curl unzip zip apache2 wget git ftp libghc-zlib-dev locales supervisor openssl openssh-server \
 	libcairo2-dev libpango1.0-dev libltdl-dev libbz2-dev vim libpq-dev gfortran libaio1 libaio-dev \
-	2to3 python3-lib2to3 python3-toolz
+	2to3 python3-lib2to3 python3-toolz libgit2-dev libssl-dev parallel
+
+#########
+### R 3.5.1
+#########
+RUN apt-get install -y r-base r-base-dev
 
 #########
 ### Working dir
@@ -27,7 +32,6 @@ RUN \
      && conda update -q -y --all \
      && conda install -c anaconda gcc_linux-64 \
      && conda install -c anaconda biopython \
-     && conda install r-essentials
 
 ENV PATH="/usr/local/anaconda/bin:$PATH"
 RUN echo "export PATH=$PATH" >> /home/.profile

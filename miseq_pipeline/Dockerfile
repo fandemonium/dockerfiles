@@ -1,5 +1,5 @@
 #FROM fy_conda_base
-FROM docker-registry.science-at-scale.io/genome-analytics/fy_conda_base
+FROM fy_conda_base
 MAINTAINER Fan Yang (snisiarc@gmail.com)
 
 #########
